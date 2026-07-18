@@ -1,0 +1,62 @@
+# The creator of the plugin is - Evil_ZialStd (Zendi)
+# Discord: evil_zialstd | Telegram: @zendioff
+
+arenas:
+  "1":
+    max-players: 2
+    # where players wait before the match starts
+    lobby: {world: world, x: 0.5, y: 100.0, z: 0.5}
+    # middle of the map — players look here on start
+    center: {world: world, x: 1020.5, y: 100.0, z: 1010.5}
+    # if you fall under this Y, you're out
+    y-kill: 0
+    # how often random items drop (in seconds)
+    item-interval-seconds: 3
+    # freeze + countdown before fight starts
+    countdown-seconds: 5
+    # whole match length (900 = 15 min)
+    match-duration-seconds: 900
+    # stop giving items this many seconds before match ends (180 = last 3 min, no items)
+    item-bossbar-stop-before-end-seconds: 180
+    # how far around pillars we wipe drops/mobs after the round
+    cleanup-radius: 64
+    # spawn points on top of each pillar
+    pillars:
+      - {world: world, x: 1010.5, y: 100.0, z: 1010.5}
+      - {world: world, x: 1030.5, y: 100.0, z: 1010.5}
+
+  "2":
+    max-players: 4
+    lobby: {world: world, x: 0.5, y: 100.0, z: 0.5}
+    center: {world: world, x: 2020.5, y: 100.0, z: 2010.5}
+    y-kill: 0
+    item-interval-seconds: 3
+    countdown-seconds: 5
+    match-duration-seconds: 900
+    item-bossbar-stop-before-end-seconds: 180
+    cleanup-radius: 64
+    pillars:
+      - {world: world, x: 2010.5, y: 100.0, z: 2010.5}
+      - {world: world, x: 2020.5, y: 100.0, z: 2020.5}
+      - {world: world, x: 2020.5, y: 100.0, z: 2000.5}
+      - {world: world, x: 2030.5, y: 100.0, z: 2010.5}
+
+  "3":
+    max-players: 8
+    lobby: {world: world, x: 0.5, y: 100.0, z: 0.5}
+    center: {world: world, x: 3020.5, y: 100.0, z: 3010.5}
+    y-kill: 0
+    item-interval-seconds: 3
+    countdown-seconds: 5
+    match-duration-seconds: 900
+    item-bossbar-stop-before-end-seconds: 180
+    cleanup-radius: 64
+    pillars:
+      - {world: world, x: 3010.5, y: 100.0, z: 3010.5}
+      - {world: world, x: 3020.5, y: 100.0, z: 3020.5}
+      - {world: world, x: 3020.5, y: 100.0, z: 3000.5}
+      - {world: world, x: 3030.5, y: 100.0, z: 3010.5}
+      - {world: world, x: 3013.5, y: 100.0, z: 3017.5}
+      - {world: world, x: 3027.5, y: 100.0, z: 3017.5}
+      - {world: world, x: 3027.5, y: 100.0, z: 3003.5}
+      - {world: world, x: 3013.5, y: 100.0, z: 3003.5}

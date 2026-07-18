@@ -1,0 +1,12 @@
+name: PillarFight
+version: '${version}'
+
+main: me.evilzialstd.pillarFight.PillarFight
+api-version: '1.21.4'
+load: POSTWORLD
+softdepend: [Vault]
+
+commands:
+  pillar:
+    description: Мини-игра Столбы
+    usage: /pillar <join|leave|start|stop>
