@@ -142,8 +142,8 @@ public class ArenaManager {
                     || player.getLocation().distance(lobby) > 100) {
                 player.teleport(lobby);
             }
-            player.sendMessage(PillarFight.PREFIX + "§7Ожидание: " + arena.getPlayers().size()
-                    + "/" + arena.getMaxPlayers() + " (арена " + arena.getId() + ")");
+            arena.broadcastWaiting();
+            arena.startWaitingBroadcast(plugin);
             if (arena.getPlayers().size() == arena.getMaxPlayers()) {
                 arena.start(plugin);
             }
@@ -171,6 +171,9 @@ public class ArenaManager {
         }
 
         arena.removePlayer(uuid);
+        if (arena.getPlayers().isEmpty()) {
+            arena.stopWaitingBroadcast();
+        }
         player.sendMessage(PillarFight.PREFIX + "§aВы вышли с арены " + arena.getId());
     }
 
@@ -204,6 +207,9 @@ public class ArenaManager {
             arena.eliminate(player);
         } else {
             arena.removePlayer(uuid);
+            if (arena.getPlayers().isEmpty()) {
+                arena.stopWaitingBroadcast();
+            }
         }
     }
     public void reload(PillarFight plugin) {
@@ -214,5 +220,12 @@ public class ArenaManager {
         }
         plugin.reloadConfig();
         loadArenas(plugin);
+    }
+    public void stopAll() {
+        for (Arena arena : new ArrayList<>(arenas)) {
+            if (arena.isRunning() || !arena.getPlayers().isEmpty()) {
+                arena.stop();
+            }
+        }
     }
 }

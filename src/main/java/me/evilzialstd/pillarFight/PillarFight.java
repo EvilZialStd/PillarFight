@@ -45,6 +45,10 @@ public final class PillarFight extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (arenaManager != null) {
+            arenaManager.stopAll();
+        }
+
         getLogger().info("disabled.");
     }
 

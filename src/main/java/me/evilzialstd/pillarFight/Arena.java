@@ -35,6 +35,7 @@ public class Arena {
     private final int matchDurationSeconds;
     private BukkitTask countdownTask;
     private BukkitTask matchTask;
+    private BukkitTask waitingTask;
     private BossBar matchBossbar;
     private int matchRemainingSeconds;
     private int itemRemainingSeconds;
@@ -100,6 +101,7 @@ public class Arena {
 
     // --- start match flow ---
     public void start(PillarFight plugin) {
+        stopWaitingBroadcast();
         if (players.size() != maxPlayers) {
             return;
         }
@@ -188,6 +190,7 @@ public class Arena {
         }
     }
     private void endMatch() {
+        stopWaitingBroadcast();
         itemsEnabled = false;
         matchBarShown = false;
         if (countdownTask != null) {
@@ -389,6 +392,34 @@ public class Arena {
             }
         }, 20L, 20L);
     }
+    // --start waiting broadcast--
+    public void broadcastWaiting() {
+        String msg = PillarFight.PREFIX + "§7Ожидание: "
+                + players.size() + "/" + maxPlayers + " (арена " + id + ")";
+        for (UUID uuid : players) {
+            Player p = Bukkit.getPlayer(uuid);
+            if (p != null) p.sendMessage(msg);
+        }
+    }
+
+    public void startWaitingBroadcast(PillarFight plugin) {
+        stopWaitingBroadcast();
+        waitingTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+            if (isRunning() || players.isEmpty()) {
+                stopWaitingBroadcast();
+                return;
+            }
+            broadcastWaiting();
+        }, 20L * 15, 20L * 15);
+    }
+
+    public void stopWaitingBroadcast() {
+        if (waitingTask != null) {
+            waitingTask.cancel();
+            waitingTask = null;
+        }
+    }
+    // --end waiting broadcast--
     // ---end countdown and timers---
 
     // ---start items and bossbars---
